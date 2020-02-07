@@ -61,6 +61,7 @@ export default class ShaderProgram {
       gl.ACTIVE_ATTRIBUTES,
     );
     let names = [];
+    //nAttributes is more than you think!
     for (let i = 0; i < nAttributes; i++) {
       let attr = gl.getActiveAttrib(this.programHandle, i);
       names.push(attr.name);
@@ -104,6 +105,11 @@ export default class ShaderProgram {
   }
   setFloat(name, value)
   { 
-      this.gl.uniform1f(this.uniforms[name], value); 
-  } 
+    this.gl.uniform1f(this.uniforms[name], value); 
+  }
+
+  setMat4fv(name, value:Iterable<Number>)
+  {
+    this.gl.uniformMatrix4fv(this.uniforms[name], false, value); 
+  }
 }

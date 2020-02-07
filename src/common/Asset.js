@@ -14,4 +14,5 @@ export function get(uri){
     if(typeof uri === 'number') {
         return localGet(uri);
     }
+    throw new Error("unsupport asset type.");
 }

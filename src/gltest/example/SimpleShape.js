@@ -101,12 +101,20 @@ export default class SimpleShape {
     const gl = this.gl;
 
     if (!this.rectVao) {
+      //use VAO 
+      /*
+      A vertex array object stores the following:
+      Calls to glEnableVertexAttribArray or glDisableVertexAttribArray.
+      Vertex attribute configurations via glVertexAttribPointer.
+      Vertex buffer objects associated with vertex attributes by calls to glVertexAttribPointer.
+      */
       this.rectVao = gl.createVertexArray();
       gl.bindVertexArray(this.rectVao);
 
       const vertices = [0.5, 0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0, -0.5, 0.5, 0];
       const indices = [0, 1, 3, 1, 2, 3];
 
+      //index drawing use EBO
       const ebo = gl.createBuffer();
       gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ebo);
       gl.bufferData(
@@ -176,7 +184,7 @@ export default class SimpleShape {
 
     const vertexColorLoc = gl.getUniformLocation(
       this.shaderProgram,
-      'outColor',
+      'ourColor',
     );
     gl.useProgram(this.shaderProgram);
     gl.uniform4f(vertexColorLoc, 0.0, Math.sin(Date.now()) / 2.0 + 0.5, 0.0, 1);
